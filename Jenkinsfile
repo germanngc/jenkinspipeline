@@ -33,14 +33,14 @@ pipeline {
 				stage ('Deploy to Staging') {
 					steps {
 						sh "ls -ltr /var/jenkins_home"
-						sh "scp -i /var/jenkins_home/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps"
+						sh "scp -o \"StrictHostKeyChecking=no\" -i /var/jenkins_home/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat/webapps"
 					}
 				}
 
 				stage ('Deploy to Production') {
 					steps {
 						sh "ls -ltr /var/jenkins_home"
-						sh "scp -i /var/jenkins_home/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps"
+						sh "scp -o \"StrictHostKeyChecking=no\" -i /var/jenkins_home/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_prod}:/var/lib/tomcat/webapps"
 					}
 				}
 			}
